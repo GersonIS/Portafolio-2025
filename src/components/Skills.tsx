@@ -47,7 +47,7 @@ const categories = [
 export default function Skills() {
   return (
     <section
-      id="habilidades"
+      id="skills"
       className="min-h-[60vh] flex items-center justify-center px-6 py-16 transition-colors duration-300"
       style={{
         background: "var(--bg-section)",

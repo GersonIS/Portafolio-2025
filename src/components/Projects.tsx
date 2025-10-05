@@ -82,10 +82,12 @@ const projects = [
 export default function Projects() {
   return (
     <section
-      id="proyectos"
-      className="min-h-[80vh] flex items-center justify-center px-6 py-16 
-      bg-gradient-to-b from-gray-50 via-white to-gray-100 
-      dark:from-gray-950 dark:via-gray-900 dark:to-black transition-colors"
+      id="projects"
+      className="min-h-[80vh] flex items-center justify-center px-6 py-16 transition-colors"
+      style={{
+        background: `linear-gradient(to bottom, var(--bg-section), var(--background), var(--bg-section))`,
+        color: `var(--text-primary)`,
+      }}
     >
       <div className="max-w-6xl w-full">
         {/* Título */}
@@ -94,6 +96,7 @@ export default function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
           className="text-3xl md:text-4xl font-bold text-center mb-12"
+          style={{ color: "var(--text-primary)" }}
         >
           Proyectos
         </motion.h2>
@@ -107,9 +110,13 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-white dark:bg-gray-900 rounded-xl shadow-md 
-              hover:shadow-2xl transition-all duration-200 overflow-hidden 
+              className="rounded-xl shadow-md hover:shadow-2xl transition-all duration-200 overflow-hidden 
               flex flex-col w-full max-w-sm h-[480px]"
+              style={{
+                background: "var(--bg-section)",
+                color: "var(--text-primary)",
+                border: "1px solid var(--border-color)",
+              }}
             >
               {/* Imagen con overlay */}
               <div className="relative w-full h-48 group overflow-hidden">
@@ -120,22 +127,31 @@ export default function Projects() {
                   className="object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 <div
-                  className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 
                   flex items-center justify-center gap-6 transition-opacity duration-300"
+                  style={{
+                    background: "rgba(0,0,0,0.45)",
+                  }}
                 >
                   <a
                     href={project.github}
                     target="_blank"
-                    className="p-3 rounded-full bg-white/80 hover:bg-white 
-                    text-gray-900 hover:text-sky-600 transition"
+                    className="p-3 rounded-full transition"
+                    style={{
+                      background: "var(--secondary-color)",
+                      color: "var(--text-primary)",
+                    }}
                   >
                     <Github size={20} />
                   </a>
                   <a
                     href={project.demo}
                     target="_blank"
-                    className="p-3 rounded-full bg-white/80 hover:bg-white 
-                    text-gray-900 hover:text-sky-600 transition"
+                    className="p-3 rounded-full transition"
+                    style={{
+                      background: "var(--secondary-color)",
+                      color: "var(--text-primary)",
+                    }}
                   >
                     <ExternalLink size={20} />
                   </a>
@@ -145,10 +161,16 @@ export default function Projects() {
               {/* Contenido */}
               <div className="p-5 flex flex-col justify-between flex-1">
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">
+                  <h3
+                    className="text-xl font-semibold mb-2"
+                    style={{ color: "var(--text-primary)" }}
+                  >
                     {project.title}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-3">
+                  <p
+                    className="text-sm mb-3 line-clamp-3"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
                     {project.description}
                   </p>
                 </div>
@@ -158,8 +180,11 @@ export default function Projects() {
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="text-xs bg-sky-100 dark:bg-sky-900 text-sky-600 dark:text-sky-300 
-                      px-2 py-1 rounded-md font-medium"
+                      className="text-xs px-2 py-1 rounded-md font-medium"
+                      style={{
+                        background: "var(--primary-color)",
+                        color: "var(--text-primary)",
+                      }}
                     >
                       {t}
                     </span>

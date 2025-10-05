@@ -6,7 +6,7 @@ import { Briefcase, Target, MapPin } from "lucide-react";
 export default function About() {
   return (
     <section
-      id="sobre-mi"
+      id="about"
       className="relative min-h-[70vh] flex items-center px-6 py-20 transition-colors duration-300 bg-[var(--bg-section)]"
     >
       <div className="max-w-5xl mx-auto text-center md:text-left space-y-12">
@@ -17,7 +17,7 @@ export default function About() {
           transition={{ duration: 0.8 }}
           className="text-3xl md:text-5xl font-extrabold tracking-tight text-[var(--text-primary)]"
         >
-          <span className="bg-gradient-to-r from-[var(--accent)] via-blue-500 to-[var(--accent-light)] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[var(--accent)] via-[var(--secondary-color)] to-[var(--accent-light)] bg-clip-text text-transparent">
             Conoce más sobre mí
           </span>
         </motion.h2>
@@ -30,9 +30,14 @@ export default function About() {
           className="text-[var(--text-secondary)] leading-relaxed text-lg md:text-xl max-w-3xl mx-auto md:mx-0"
         >
           Soy un entusiasta de la{" "}
-          <span className="text-blue-500 font-semibold">tecnología</span> y la{" "}
-          <span className="text-red-500 font-semibold">ciberseguridad</span>. Mi
-          enfoque va más allá de escribir código: busco{" "}
+          <span className="text-[var(--secondary-color)] font-semibold">
+            tecnología
+          </span>{" "}
+          y la{" "}
+          <span className="text-[var(--primary-color)] font-semibold">
+            ciberseguridad
+          </span>
+          . Mi enfoque va más allá de escribir código: busco{" "}
           <span className="text-[var(--accent)] font-semibold">
             construir experiencias digitales seguras y atractivas
           </span>{" "}
@@ -50,14 +55,17 @@ export default function About() {
         >
           {/* Experiencia */}
           <div className="p-6 rounded-2xl shadow-lg bg-[var(--card-bg)] border border-[var(--border-color)] hover:shadow-xl transition duration-300">
-            <Briefcase className="w-8 h-8 text-blue-500 mb-4" />
+            <Briefcase className="w-8 h-8 text-[var(--secondary-color)] mb-4" />
             <h3 className="text-xl font-semibold mb-2 text-[var(--text-primary)]">
               Experiencia
             </h3>
             <p className="text-sm text-[var(--text-secondary)]">
               He trabajado en{" "}
-              <span className="font-medium text-blue-500">proyectos web</span> y{" "}
-              <span className="font-medium text-red-500">
+              <span className="font-medium text-[var(--secondary-color)]">
+                proyectos web
+              </span>{" "}
+              y{" "}
+              <span className="font-medium text-[var(--primary-color)]">
                 prácticas de seguridad
               </span>{" "}
               que combinan creatividad, tecnología y protección digital.
@@ -66,15 +74,20 @@ export default function About() {
 
           {/* Objetivo */}
           <div className="p-6 rounded-2xl shadow-lg bg-[var(--card-bg)] border border-[var(--border-color)] hover:shadow-xl transition duration-300">
-            <Target className="w-8 h-8 text-red-500 mb-4" />
+            <Target className="w-8 h-8 text-[var(--primary-color)] mb-4" />
             <h3 className="text-xl font-semibold mb-2 text-[var(--text-primary)]">
               Visión
             </h3>
             <p className="text-sm text-[var(--text-secondary)]">
               Mi meta es crecer como{" "}
-              <span className="font-medium text-red-500">pentester</span> y{" "}
-              <span className="font-medium text-blue-500">desarrollador</span>,
-              aportando soluciones innovadoras y seguras en cada proyecto.
+              <span className="font-medium text-[var(--primary-color)]">
+                pentester
+              </span>{" "}
+              y{" "}
+              <span className="font-medium text-[var(--secondary-color)]">
+                desarrollador
+              </span>
+              , aportando soluciones innovadoras y seguras en cada proyecto.
             </p>
           </div>
 

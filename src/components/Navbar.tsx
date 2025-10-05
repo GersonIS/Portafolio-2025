@@ -1,118 +1,201 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Palette } from "lucide-react";
 import { useTheme } from "next-themes";
-import ThemeSwitcher from "./ThemeSwitcher";
 
+// Links de navegación
 const navLinks = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#sobre-mi", label: "Sobre mí" },
-  { href: "#habilidades", label: "Habilidades" },
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#contacto", label: "Contacto" },
+  { name: "Inicio", href: "#hero" },
+  { name: "Sobre mí", href: "#about" },
+  { name: "Habilidades", href: "#skills" },
+  { name: "Proyectos", href: "#projects" },
+  { name: "Contacto", href: "#contact" },
 ];
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+// Temas personalizados (excluyendo light/dark)
+const themes = [
+  { key: "theme-1", label: "Tema Clásico" },
+  { key: "theme-2", label: "Tema Azul" },
+  { key: "theme-3", label: "Tema Naranja" },
+  { key: "theme-4", label: "Tema Elegante" },
+  { key: "theme-5", label: "Tema Creativo" },
+];
 
-  const toggleThemeMode = () => {
-    setTheme(isDark ? "light" : "dark");
-  };
+// Controles de tema personalizados
+const ThemeControls = ({
+  currentTheme,
+  toggleDarkMode,
+  handleThemeChange,
+}: {
+  currentTheme: string;
+  toggleDarkMode: () => void;
+  handleThemeChange: (theme: string) => void;
+}) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50">
-      <div className="bg-gradient-to-r from-black via-gray-900 to-blue-900 backdrop-blur-lg shadow-lg border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <Link
-            href="#inicio"
-            className="flex items-center gap-2 text-xl md:text-2xl font-extrabold tracking-wide"
-            onClick={() => setIsOpen(false)}
-          >
-            <span className="text-[var(--secondary-color)]">Ger</span>
-            <span className="text-[var(--third-color)]">son</span>
-          </Link>
+    <div className="relative flex items-center space-x-3 pl-4 border-l border-[var(--secondary-color)]/40">
+      {/* Botón claro/oscuro */}
+      <button
+        onClick={toggleDarkMode}
+        className="p-2 rounded-full hover:bg-[var(--secondary-color)]/20 transition"
+        aria-label="Alternar modo claro/oscuro"
+      >
+        {currentTheme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+      </button>
 
-          {/* NAV desktop */}
-          <ul className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.href} className="relative group">
-                <Link
-                  href={link.href}
-                  className="text-gray-200 hover:text-[var(--third-color)] transition-colors duration-200 px-1 py-1"
-                >
-                  {link.label}
-                  <span className="absolute left-0 -bottom-1 h-[2px] bg-gradient-to-r from-[var(--secondary-color)] to-[var(--third-color)] w-0 group-hover:w-full transition-all duration-300" />
-                </Link>
-              </li>
-            ))}
+      {/* Selector de temas personalizados */}
+      <div className="relative">
+        <button
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+          aria-haspopup="true"
+          aria-expanded={dropdownOpen}
+          className="p-2 rounded-full hover:bg-[var(--secondary-color)]/20 transition"
+        >
+          <Palette size={18} />
+        </button>
 
-            {/* Toggle modo claro/oscuro */}
-            <button
-              onClick={toggleThemeMode}
-              aria-label="Cambiar modo"
-              className="ml-2 p-2 rounded-full backdrop-blur-md bg-white/10 hover:bg-white/20 text-[var(--third-color)] border border-white/20 shadow-md transition-all"
+        <AnimatePresence>
+          {dropdownOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -5 }}
+              className="absolute right-0 mt-2 w-48 rounded-lg shadow-lg z-10 bg-[var(--primary-color)] text-[var(--third-color)] border border-[var(--secondary-color)]/20"
             >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
+              <ul className="py-2">
+                {themes.map((themeOption) => (
+                  <li key={themeOption.key}>
+                    <button
+                      onClick={() => {
+                        handleThemeChange(themeOption.key);
+                        setDropdownOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-sm font-medium hover:bg-[var(--secondary-color)]/10 transition-colors"
+                    >
+                      {themeOption.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
 
-            {/* Selector de tema */}
-            <ThemeSwitcher />
-          </ul>
+// Navbar principal
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-          {/* Botón móvil */}
-          <div className="md:hidden flex items-center gap-2">
-            <button
-              onClick={() => setIsOpen((v) => !v)}
-              aria-expanded={isOpen}
-              aria-label="Abrir menú"
-              className="p-2 rounded-md bg-white/10 hover:bg-white/20 text-white"
+  const currentTheme = theme ?? "light";
+
+  const handleThemeChange = useCallback(
+    (selectedTheme: string) => {
+      setTheme(selectedTheme);
+    },
+    [setTheme]
+  );
+
+  const toggleDarkMode = useCallback(() => {
+    setTheme(currentTheme === "light" ? "dark" : "light");
+  }, [currentTheme, setTheme]);
+
+  useEffect(() => setMounted(true), []);
+
+  // 🚀 Evita error de hidratación: no renderizamos hasta que esté montado
+  if (!mounted) {
+    return (
+      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[var(--primary-color)]/80 text-[var(--third-color)] shadow-md transition-all duration-300" />
+    );
+  }
+
+  return (
+    <motion.nav
+      className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[var(--primary-color)]/80 text-[var(--third-color)] shadow-md transition-all duration-300"
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+    >
+      <div className="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center">
+        {/* Logo */}
+        <Link
+          href="#hero"
+          className="text-lg font-bold tracking-wide hover:opacity-90 transition-opacity"
+        >
+          Gerson<span className="text-[var(--secondary-color)]">.</span>
+        </Link>
+
+        {/* Links - desktop */}
+        <div className="hidden md:flex items-center space-x-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="relative group text-sm font-medium tracking-wide"
             >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
+              {link.name}
+              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[var(--secondary-color)] group-hover:w-full transition-all duration-300" />
+            </Link>
+          ))}
+
+          {/* Controles de tema */}
+          <ThemeControls
+            currentTheme={currentTheme}
+            toggleDarkMode={toggleDarkMode}
+            handleThemeChange={handleThemeChange}
+          />
         </div>
+
+        {/* Botón hamburguesa */}
+        <button
+          className="md:hidden focus:outline-none text-[var(--third-color)]"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+        >
+          {menuOpen ? <X size={26} /> : <Menu size={26} />}
+        </button>
       </div>
 
-      {/* MENÚ MÓVIL */}
+      {/* Menú móvil */}
       <AnimatePresence>
-        {isOpen && (
+        {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -6 }}
+            id="mobile-menu"
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden bg-gradient-to-b from-black via-gray-900 to-blue-900 text-gray-100 backdrop-blur-md shadow-lg"
+            exit={{ opacity: 0, y: -15 }}
+            className="md:hidden bg-[var(--primary-color)]/95 text-[var(--third-color)]"
           >
-            <div className="px-6 py-4 space-y-4">
+            <div className="flex flex-col items-center gap-6 py-6">
               {navLinks.map((link) => (
                 <Link
-                  key={link.href}
+                  key={link.name}
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block text-lg font-medium px-2 py-2 rounded-md hover:text-[var(--secondary-color)] transition-colors"
+                  onClick={() => setMenuOpen(false)}
+                  className="text-base font-medium hover:text-[var(--secondary-color)] transition-colors"
                 >
-                  {link.label}
+                  {link.name}
                 </Link>
               ))}
+
+              {/* Controles de tema en móvil */}
+              <ThemeControls
+                currentTheme={currentTheme}
+                toggleDarkMode={toggleDarkMode}
+                handleThemeChange={handleThemeChange}
+              />
             </div>
-            <button
-              onClick={toggleThemeMode}
-              aria-label="Cambiar modo"
-              className="p-2 rounded-md bg-white/10 hover:bg-white/20 text-[var(--third-color)] border border-white/10"
-            >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-            {/* Selector de tema */}
-            <ThemeSwitcher />
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

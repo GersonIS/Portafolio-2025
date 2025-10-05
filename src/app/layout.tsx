@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import { ThemeProvider } from "next-themes";
+import ClientLayout from "@/components/ClientLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,17 +17,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.className} transition-colors duration-300`}>
-        {/* ThemeProvider controla los temas personalizados */}
-        <ThemeProvider
-          attribute="data-theme"
-          defaultTheme="theme-1"
-          enableSystem={false}
-          storageKey="gerson-theme"
-        >
-          <Navbar />
-          {children}
-        </ThemeProvider>
+      <body suppressHydrationWarning className={`${inter.className} transition-colors duration-300`}>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

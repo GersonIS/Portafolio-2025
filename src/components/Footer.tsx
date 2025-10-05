@@ -2,10 +2,19 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, Instagram } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
+  const [year, setYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
   return (
-    <footer className="bg-[var(--background)] text-[var(--foreground)] transition-colors duration-500 border-t border-[var(--border)]">
+    <footer
+      className="bg-[var(--background)] text-[var(--foreground)] 
+      border-t border-[var(--border)] transition-colors duration-500"
+    >
       <div className="max-w-6xl mx-auto px-6 py-10">
         {/* Sección principal */}
         <motion.div
@@ -13,71 +22,83 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-[var(--border)]"
+          className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 
+          border-b border-[var(--border)]"
         >
           {/* Marca / Logo */}
           <h3 className="text-lg font-semibold">
-            Gerson<span className="text-sky-500">.</span>
+            Gerson
+            <span className="text-[var(--primary-color)]">.</span>
           </h3>
 
           {/* Enlaces */}
           <nav className="flex gap-6 text-sm font-medium">
-            <a
-              href="#sobre-mi"
-              className="hover:text-sky-500 transition-colors duration-200"
-            >
-              Sobre mí
-            </a>
-            <a
-              href="#proyectos"
-              className="hover:text-sky-500 transition-colors duration-200"
-            >
-              Proyectos
-            </a>
-            <a
-              href="#contacto"
-              className="hover:text-sky-500 transition-colors duration-200"
-            >
-              Contacto
-            </a>
+            {[
+              { name: "Sobre mí", href: "#sobre-mi" },
+              { name: "Proyectos", href: "#proyectos" },
+              { name: "Contacto", href: "#contacto" },
+            ].map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="relative group transition-colors duration-200"
+              >
+                <span className="group-hover:text-[var(--primary-color)]">
+                  {link.name}
+                </span>
+                <span
+                  className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-[var(--primary-color)] 
+                  group-hover:w-full transition-all duration-300"
+                />
+              </a>
+            ))}
           </nav>
 
           {/* Redes sociales */}
           <div className="flex space-x-4">
-            <a
-              href="https://github.com/"
-              target="_blank"
-              className="p-2 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition-all duration-200"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-            <a
-              href="https://linkedin.com/"
-              target="_blank"
-              className="p-2 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition-all duration-200"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a
-              href="https://instagram.com/"
-              target="_blank"
-              className="p-2 rounded-full hover:bg-sky-500/10 hover:text-sky-500 transition-all duration-200"
-            >
-              <Instagram className="w-5 h-5" />
-            </a>
+            {[
+              {
+                href: "https://github.com/",
+                icon: <Github className="w-5 h-5" />,
+              },
+              {
+                href: "https://linkedin.com/",
+                icon: <Linkedin className="w-5 h-5" />,
+              },
+              {
+                href: "https://instagram.com/",
+                icon: <Instagram className="w-5 h-5" />,
+              },
+            ].map((social, i) => (
+              <motion.a
+                key={i}
+                href={social.href}
+                target="_blank"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2 rounded-full 
+                hover:bg-[var(--primary-color)]/10 
+                hover:text-[var(--primary-color)] 
+                transition-all duration-200"
+              >
+                {social.icon}
+              </motion.a>
+            ))}
           </div>
         </motion.div>
 
         {/* Copyright */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center text-sm mt-6 opacity-80"
-        >
-          © {new Date().getFullYear()} Gerson. Todos los derechos reservados.
-        </motion.div>
+        {year && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center text-sm mt-6 opacity-80"
+          >
+            © {year} Gerson. Todos los derechos reservados.
+          </motion.div>
+        )}
       </div>
     </footer>
   );

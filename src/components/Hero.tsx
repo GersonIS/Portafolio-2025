@@ -34,7 +34,7 @@ export default function Hero() {
 
   return (
     <section
-      id="inicio"
+      id="hero"
       className="relative min-h-screen flex flex-col md:flex-row items-center justify-center gap-12 px-6 md:px-12 lg:px-20 pt-24
       transition-colors duration-500"
       style={{
