@@ -2,14 +2,36 @@
 
 import { motion } from "framer-motion";
 import { Mail, Github, Linkedin, Phone } from "lucide-react";
+import { useState } from "react";
 
 const Contact = () => {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { name, email, message } = form;
+    window.open(
+      `https://wa.me/932093895?text=Nombre:%20${name}%0ACorreo:%20${email}%0AMensaje:%20${message}`
+    );
+    setForm({ name: "", email: "", message: "" });
+  };
+
   return (
     <section
       id="contact"
       className="min-h-screen flex items-center justify-center px-6 py-20 transition-colors"
       style={{
-        background: `linear-gradient(to bottom, var(--bg-section), var(--background))`,
+        background: `var(--background)`,
         color: `var(--text-primary)`,
       }}
     >
@@ -40,7 +62,7 @@ const Contact = () => {
 
           <div className="space-y-4">
             <a
-              href="mailto:tucorreo@ejemplo.com"
+              href="mailto:gersondelacruz455@gmail.com"
               className="flex items-center gap-3 transition-colors"
               style={{
                 color: "var(--text-primary)",
@@ -52,11 +74,11 @@ const Contact = () => {
                 (e.currentTarget.style.color = "var(--text-primary)")
               }
             >
-              <Mail size={20} /> tucorreo@ejemplo.com
+              <Mail size={20} /> gersondelacruz455@gmail.com
             </a>
 
             <a
-              href="https://github.com/tuusuario"
+              href="https://github.com/GersonIS"
               target="_blank"
               className="flex items-center gap-3 transition-colors"
               style={{
@@ -69,11 +91,11 @@ const Contact = () => {
                 (e.currentTarget.style.color = "var(--text-primary)")
               }
             >
-              <Github size={20} /> github.com/tuusuario
+              <Github size={20} /> github.com/GersonIS
             </a>
 
             <a
-              href="https://linkedin.com/in/tuusuario"
+              href="https://www.linkedin.com/in/gerson-roberth-de-la-cruz-rodr%C3%ADguez-2539a1263/"
               target="_blank"
               className="flex items-center gap-3 transition-colors"
               style={{
@@ -86,11 +108,11 @@ const Contact = () => {
                 (e.currentTarget.style.color = "var(--text-primary)")
               }
             >
-              <Linkedin size={20} /> linkedin.com/in/tuusuario
+              <Linkedin size={20} /> linkedin.com/in/Gerson
             </a>
 
             <a
-              href="https://wa.me/51999999999"
+              href="https://wa.me/51932093895"
               target="_blank"
               className="flex items-center gap-3 transition-colors"
               style={{
@@ -103,7 +125,7 @@ const Contact = () => {
                 (e.currentTarget.style.color = "var(--text-primary)")
               }
             >
-              <Phone size={20} /> +51 999 999 999
+              <Phone size={20} /> +51 932 093 895
             </a>
           </div>
         </div>
@@ -120,6 +142,7 @@ const Contact = () => {
             border: "1px solid var(--border-color)",
             color: "var(--text-primary)",
           }}
+          onSubmit={handleSubmit}
         >
           <div className="flex flex-col">
             <label
@@ -132,6 +155,11 @@ const Contact = () => {
             <input
               type="text"
               id="name"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              required
+              autoComplete="off"
               placeholder="Ingresa tu nombre"
               className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 transition"
               style={{
@@ -154,6 +182,11 @@ const Contact = () => {
             <input
               type="email"
               id="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+              autoComplete="off"
               placeholder="Ingresa tu correo"
               className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 transition"
               style={{
@@ -175,7 +208,12 @@ const Contact = () => {
             <textarea
               id="message"
               placeholder="Escribe tu mensaje"
+              name="message"
+              value={form.message}
+              onChange={handleChange}
               rows={5}
+              required
+              autoComplete="off"
               className="w-full px-4 py-2 rounded-lg border resize-none focus:outline-none focus:ring-2 transition"
               style={{
                 background: "var(--background)",

@@ -16,8 +16,8 @@ body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.35s ease, color 0.35s ease;
-  background: var(--background);
+  /* transition: background-color 0.35s ease, color 0.35s ease;
+  background: var(--background); */
   color: var(--foreground);
   -webkit-tap-highlight-color: transparent;
 }
@@ -62,6 +62,10 @@ body {
   --shadow-elev-1: 0 4px 12px rgba(2,6,23,0.08);
   --shadow-elev-2: 0 10px 30px rgba(2,6,23,0.12);
   --radius-lg: 1rem;
+  /* RGB helpers (set as fallback: light theme values) */
+  --foreground-rgb: 11,18,32; /* #0b1220 */
+  --background-rgb: 248,246,242; /* light background */
+  --accent-rgb: 196,155,102; /* dorado fallback */
 }
 
 /* ------------------------------------------------
@@ -83,7 +87,11 @@ body {
   --border: rgba(11,18,32,0.06);
 
   --text-primary: #071026;
-  --text-secondary: #475569;
+  --text-secondary: #585c63;
+  --foreground-rgb: 11,18,32;
+  --background-rgb: 248,246,242;
+  --accent-rgb: 196,155,102;
+  --overlay: rgba(11,18,32,0.06);
 }
 
 /* ------------------------------------------------
@@ -92,7 +100,7 @@ body {
 [data-theme="dark"] {
   --primary-color: #0b1220;   /* casi negro */
   --secondary-color: #1f2937; /* gris oscuro */
-  --third-color: #0f172a;     /* azul muy oscuro */
+  --third-color: #7b87a2;     /* azul muy oscuro */
   --accent: #805ad5;          /* morado tenue */
   --accent-light: #b794f4;
 
@@ -106,6 +114,10 @@ body {
 
   --text-primary: #e6eef8;
   --text-secondary: #94a3b8;
+  --foreground-rgb: 230,238,248;
+  --background-rgb: 5,6,10;
+  --accent-rgb: 128,90,213; /* #805ad5 */
+  --overlay: rgba(230,238,248,0.06);
 }
 
 /* ------------------------------------------------
@@ -127,7 +139,11 @@ body {
   --border-color: rgba(15,23,42,0.06);
 
   --text-primary: #0f172a;
-  --text-secondary: #6b7280;
+  --text-secondary: #c3c5c9;
+  --foreground-rgb: 15,23,42;
+  --background-rgb: 254,247,248;
+  --accent-rgb: 217,44,84;
+  --overlay: rgba(15,23,42,0.06);
 }
 
 /* ------------------------------------------------
@@ -150,6 +166,10 @@ body {
 
   --text-primary: #0b1220;
   --text-secondary: #475569;
+  --foreground-rgb: 7,16,38;
+  --background-rgb: 238,248,255;
+  --accent-rgb: 121,158,255;
+  --overlay: rgba(7,16,38,0.06);
 }
 
 /* ------------------------------------------------
@@ -171,7 +191,11 @@ body {
   --border-color: rgba(7,16,38,0.06);
 
   --text-primary: #071026;
-  --text-secondary: #475569;
+  --text-secondary: #b0b9c6;
+  --foreground-rgb: 7,16,38;
+  --background-rgb: 255,247,241;
+  --accent-rgb: 254,119,67;
+  --overlay: rgba(7,16,38,0.06);
 }
 
 /* ------------------------------------------------
@@ -193,7 +217,11 @@ body {
   --border-color: rgba(255,255,255,0.04);
 
   --text-primary: #f6f2ec;
-  --text-secondary: #cfc6b9;
+  --text-secondary: #555350;
+  --foreground-rgb: 246,242,236;
+  --background-rgb: 6,6,6;
+  --accent-rgb: 196,155,102;
+  --overlay: rgba(246,242,236,0.06);
 }
 
 /* ------------------------------------------------
@@ -216,6 +244,10 @@ body {
 
   --text-primary: #071026;
   --text-secondary: #475569;
+  --foreground-rgb: 7,16,38;
+  --background-rgb: 245,243,255;
+  --accent-rgb: 124,58,237;
+  --overlay: rgba(7,16,38,0.06);
 }
 
 /* ===========================================
@@ -241,6 +273,7 @@ a:focus-visible,
 .line-clamp-3 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  line-clamp: 3;
   -webkit-line-clamp: 3;
   overflow: hidden;
 }

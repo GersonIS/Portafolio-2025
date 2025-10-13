@@ -39,7 +39,7 @@ export default function Hero() {
       transition-colors duration-500"
       style={{
         background: `linear-gradient(to bottom, var(--primary-color), var(--secondary-color), var(--third-color))`,
-        color: "white",
+        color: "var(--foreground)",
       }}
     >
       {/* Imagen con efecto gradiente */}
@@ -59,7 +59,7 @@ export default function Hero() {
             src="/images/yo.jpeg"
             alt="Gerson"
             fill
-            className="rounded-full object-cover border-[4px] border-gray-900"
+            className="rounded-full object-cover border-[4px] border-[var(--border-color)]"
           />
         </div>
       </motion.div>
@@ -71,15 +71,13 @@ export default function Hero() {
         transition={{ duration: 0.6 }}
         className="text-center md:text-left max-w-xl"
       >
-        <h1 className="text-3xl md:text-5xl font-extrabold mb-4 h-16">
+        <h1
+          className="text-3xl md:text-5xl font-extrabold mb-4 h-16"
+          style={{ textShadow: "0 2px 8px rgba(0,0,0,0.18)" }}
+        >
           <span
             style={{
-              color:
-                index === 0
-                  ? "var(--third-color)"
-                  : index === 1
-                  ? "var(--secondary-color)"
-                  : "var(--primary-color)",
+              color: "var(--foreground)",
             }}
           >
             {roles[index].substring(0, subIndex)}
@@ -87,18 +85,10 @@ export default function Hero() {
           <span className="animate-pulse">|</span>
         </h1>
 
-        <p className="text-gray-200 mb-8 leading-relaxed">
-          Soy bachiller en{" "}
-          <span style={{ color: "var(--third-color)" }}>
-            Ingeniería de Sistemas
-          </span>
-          , apasionado por el{" "}
-          <span style={{ color: "var(--secondary-color)" }}>
-            desarrollo web
-          </span>{" "}
-          y la{" "}
-          <span style={{ color: "var(--primary-color)" }}>ciberseguridad</span>.
-          Me encanta crear aplicaciones modernas, seguras y con un diseño
+        <p className="mb-8 leading-relaxed text-[var(--text-secondary)]">
+          Soy bachiller en <span>Ingeniería de Sistemas</span>, apasionado por
+          el <span>desarrollo web</span> y la <span>ciberseguridad</span>. Me
+          encanta crear aplicaciones modernas, seguras y con un diseño
           atractivo.
         </p>
 
@@ -107,7 +97,7 @@ export default function Hero() {
           <a
             href="/CV_Gerson.pdf"
             download
-            className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition-transform text-white"
+            className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition-transform text-[var(--foreground)]"
             style={{
               background: `linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--third-color))`,
             }}
@@ -119,26 +109,35 @@ export default function Hero() {
           {/* Redes sociales */}
           <div className="flex gap-4">
             <a
-              href="https://linkedin.com/in/tu-perfil"
+              href="https://www.linkedin.com/in/gerson-roberth-de-la-cruz-rodr%C3%ADguez-2539a1263/"
               target="_blank"
-              className="p-3 rounded-full bg-white/10 hover:scale-110 transition-all"
-              style={{ color: "var(--secondary-color)" }}
+              className="p-3 rounded-full hover:scale-110 transition-all"
+              style={{
+                background: "var(--overlay)",
+                color: "var(--secondary-color)",
+              }}
             >
               <Linkedin size={20} />
             </a>
             <a
-              href="https://github.com/tu-usuario"
+              href="https://github.com/GersonIS"
               target="_blank"
-              className="p-3 rounded-full bg-white/10 hover:scale-110 transition-all"
-              style={{ color: "var(--third-color)" }}
+              className="p-3 rounded-full hover:scale-110 transition-all"
+              style={{
+                background: "var(--overlay)",
+                color: "var(--third-color)",
+              }}
             >
               <Github size={20} />
             </a>
             <a
-              href="https://instagram.com/tu-usuario"
+              href="https://www.instagram.com/gerson_rodriguez_tkd/?next=%2F"
               target="_blank"
-              className="p-3 rounded-full bg-white/10 hover:scale-110 transition-all"
-              style={{ color: "var(--primary-color)" }}
+              className="p-3 rounded-full hover:scale-110 transition-all"
+              style={{
+                background: "var(--overlay)",
+                color: "var(--primary-color)",
+              }}
             >
               <Instagram size={20} />
             </a>

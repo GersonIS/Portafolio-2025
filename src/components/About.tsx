@@ -7,7 +7,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative min-h-[70vh] flex items-center px-6 py-20 transition-colors duration-300 bg-[var(--bg-section)]"
+      className="relative min-h-screen flex items-center px-6 py-20 transition-colors duration-300 bg-[var(--background)]"
     >
       <div className="max-w-5xl mx-auto text-center md:text-left space-y-12">
         {/* Título */}
@@ -27,18 +27,27 @@ export default function About() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="text-[var(--text-secondary)] leading-relaxed text-lg md:text-xl max-w-3xl mx-auto md:mx-0"
+          className="text-[var(--text-primary)] leading-relaxed text-lg md:text-xl max-w-3xl mx-auto md:mx-0"
         >
           Soy un entusiasta de la{" "}
-          <span className="text-[var(--secondary-color)] font-semibold">
+          <span
+            className="font-semibold"
+            style={{ background: "var(--overlay)", color: "var(--secondary-color)", padding: "0.125rem 0.25rem", borderRadius: "0.25rem" }}
+          >
             tecnología
           </span>{" "}
           y la{" "}
-          <span className="text-[var(--primary-color)] font-semibold">
+          <span
+            className="font-semibold"
+            style={{ background: "var(--overlay)", color: "var(--secondary-color)", padding: "0.125rem 0.25rem", borderRadius: "0.25rem" }}
+          >
             ciberseguridad
           </span>
           . Mi enfoque va más allá de escribir código: busco{" "}
-          <span className="text-[var(--accent)] font-semibold">
+          <span
+            className="font-semibold"
+            style={{ background: "var(--overlay)", color: "var(--accent)", padding: "0.125rem 0.25rem", borderRadius: "0.25rem" }}
+          >
             construir experiencias digitales seguras y atractivas
           </span>{" "}
           que inspiren confianza y generen impacto real. Siempre estoy
@@ -61,11 +70,11 @@ export default function About() {
             </h3>
             <p className="text-sm text-[var(--text-secondary)]">
               He trabajado en{" "}
-              <span className="font-medium text-[var(--secondary-color)]">
+              <span className="font-medium" style={{ background: "var(--overlay)", color: "var(--secondary-color)", padding: "0.125rem 0.25rem", borderRadius: "0.25rem" }}>
                 proyectos web
               </span>{" "}
               y{" "}
-              <span className="font-medium text-[var(--primary-color)]">
+              <span className="font-medium" style={{ background: "var(--overlay)", color: "var(--primary-color)", padding: "0.125rem 0.25rem", borderRadius: "0.25rem" }}>
                 prácticas de seguridad
               </span>{" "}
               que combinan creatividad, tecnología y protección digital.
@@ -80,11 +89,11 @@ export default function About() {
             </h3>
             <p className="text-sm text-[var(--text-secondary)]">
               Mi meta es crecer como{" "}
-              <span className="font-medium text-[var(--primary-color)]">
+              <span className="font-medium" style={{ background: "var(--overlay)", color: "var(--primary-color)", padding: "0.125rem 0.25rem", borderRadius: "0.25rem" }}>
                 pentester
               </span>{" "}
               y{" "}
-              <span className="font-medium text-[var(--secondary-color)]">
+              <span className="font-medium" style={{ background: "var(--overlay)", color: "var(--secondary-color)", padding: "0.125rem 0.25rem", borderRadius: "0.25rem" }}>
                 desarrollador
               </span>
               , aportando soluciones innovadoras y seguras en cada proyecto.
@@ -99,7 +108,7 @@ export default function About() {
             </h3>
             <p className="text-sm text-[var(--text-secondary)]">
               Orgullosamente desde{" "}
-              <span className="font-medium text-[var(--accent)]">Perú 🇵🇪</span>,
+              <span className="font-medium" style={{ background: "var(--overlay)", color: "var(--accent)", padding: "0.125rem 0.25rem", borderRadius: "0.25rem" }}>Perú 🇵🇪</span>,
               conectado con el mundo digital.
             </p>
           </div>

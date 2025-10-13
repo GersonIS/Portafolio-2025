@@ -34,9 +34,9 @@ export default function Footer() {
           {/* Enlaces */}
           <nav className="flex gap-6 text-sm font-medium">
             {[
-              { name: "Sobre mí", href: "#sobre-mi" },
-              { name: "Proyectos", href: "#proyectos" },
-              { name: "Contacto", href: "#contacto" },
+              { name: "Sobre mí", href: "#about" },
+              { name: "Proyectos", href: "#projects" },
+              { name: "Contacto", href: "#contact" },
             ].map((link) => (
               <a
                 key={link.name}
@@ -58,15 +58,15 @@ export default function Footer() {
           <div className="flex space-x-4">
             {[
               {
-                href: "https://github.com/",
+                href: "https://github.com/GersonIS",
                 icon: <Github className="w-5 h-5" />,
               },
               {
-                href: "https://linkedin.com/",
+                href: "https://www.linkedin.com/in/gerson-roberth-de-la-cruz-rodr%C3%ADguez-2539a1263/",
                 icon: <Linkedin className="w-5 h-5" />,
               },
               {
-                href: "https://instagram.com/",
+                href: "https://www.instagram.com/gerson_rodriguez_tkd/?next=%2F",
                 icon: <Instagram className="w-5 h-5" />,
               },
             ].map((social, i) => (

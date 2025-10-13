@@ -113,13 +113,13 @@ export default function Navbar() {
   // 🚀 Evita error de hidratación: no renderizamos hasta que esté montado
   if (!mounted) {
     return (
-      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[var(--primary-color)]/80 text-[var(--third-color)] shadow-md transition-all duration-300" />
+      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[var(--primary-color)]/80 text-[var(--foreground)] shadow-md transition-all duration-300" />
     );
   }
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[var(--primary-color)]/80 text-[var(--third-color)] shadow-md transition-all duration-300"
+      className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[var(--primary-color)]/80 text-[var(--foreground)] shadow-md transition-all duration-300"
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
     >
@@ -155,7 +155,7 @@ export default function Navbar() {
 
         {/* Botón hamburguesa */}
         <button
-          className="md:hidden focus:outline-none text-[var(--third-color)]"
+          className="md:hidden focus:outline-none text-[var(--foreground)]"
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
